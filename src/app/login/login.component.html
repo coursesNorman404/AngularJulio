@@ -1,0 +1,21 @@
+{{title | lowercase}}
+{{'4545.545472' | number:'1.2-2'}}
+{{date | date:"short"}}
+<br>
+<input type="email" placeholder="Ingresa Correo" [(ngModel)]="email" >
+<input type="password" placeholder="Ingresa Contraseña"[(ngModel)]="password">
+
+<ng-container *ngFor="let user of users; let i = index" [ngSwitch]="user.type">
+    <li contar-clicks [ngStyle]="{color: (user.status) ? 'blue':'red'}" 
+    [ngClass]="{numero_par: (i+1)%2 !== 0}"
+    [resaltar]="user.type">
+       {{i}}: {{user.name}} - {{user.email}}
+       <span *ngSwitchCase="'pay'"> Pago</span>
+       <span *ngSwitchCase="'free'">Gratis</span>
+       <span *ngSwitchCase="'aa'">Todo bien en casa??</span>
+      </li>
+</ng-container>
+
+
+
+<button (click) = "email = ''">Entrar</button>

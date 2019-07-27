@@ -1,3 +1,8 @@
-.numero_par {
-  font-size: 25px
+.loginContainer {
+  background-image: url('/assets/img/msnbg.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.btnS {
+  color: white;
 }

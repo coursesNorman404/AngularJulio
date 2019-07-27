@@ -1,21 +1,29 @@
-{{title | lowercase}}
-{{'4545.545472' | number:'1.2-2'}}
-{{date | date:"short"}}
-<br>
-<input type="email" placeholder="Ingresa Correo" [(ngModel)]="email" >
-<input type="password" placeholder="Ingresa Contraseña"[(ngModel)]="password">
-
-<ng-container *ngFor="let user of users; let i = index" [ngSwitch]="user.type">
-    <li contar-clicks [ngStyle]="{color: (user.status) ? 'blue':'red'}" 
-    [ngClass]="{numero_par: (i+1)%2 !== 0}"
-    [resaltar]="user.type">
-       {{i}}: {{user.name}} - {{user.email}}
-       <span *ngSwitchCase="'pay'"> Pago</span>
-       <span *ngSwitchCase="'free'">Gratis</span>
-       <span *ngSwitchCase="'aa'">Todo bien en casa??</span>
-      </li>
-</ng-container>
-
-
-
-<button (click) = "email = ''">Entrar</button>
+<div class="loginContainer">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-3">
+                <div class="avatarFrameOffline marto15 marbo15">
+                    <img src="assets/img/generic_avatar.png" alt="avatarGenerico" class="avatarImage img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-6">
+                <div class="center">
+                    <h3>Iniciar Sesion</h3>
+                </div>
+                <p *ngIf="operacion == 'register'">Ya tienes cuenta? Has <a (click)="operacion = 'login'">Login</a></p>
+                <p *ngIf="operacion == 'login'">No tienes cuenta? <a (click)="operacion = 'register'">Registrate</a></p>
+                <div class="borderdContainer">
+                    <input class="form-control marbo15" type="email" placeholder="Ingresa correo" />
+                    <input class="form-control marbo15" type="password" placeholder="Ingresa contraseña">
+                    <input *ngIf="operacion == 'register'" class="form-control marbo15" type="text" placeholder="Ingresa Nick">
+                </div>
+                <div class="center marbo15 btnS">
+                    <a *ngIf="operacion == 'login'" class="btn btn-primary">Entrar</a>
+                    <a *ngIf="operacion == 'register'" class="btn btn-primary">Registrarme</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

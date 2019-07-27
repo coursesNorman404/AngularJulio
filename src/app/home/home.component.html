@@ -1,1 +1,40 @@
-<p>home works!</p>
+<div class="homeContainer">
+  <div class="whiteBorderClassBox">
+    <div class="homeHeaderContainer">
+      <div class="row">
+        <div class="col-md-auto">
+          <div class="avatarFrameOnline">
+            <img src="assets/img/generic_avatar.png" alt="avatarGenerico" id="homeAvatarPicture">
+          </div>
+        </div>
+        <div class="col-md-auto">
+          <b>{{myUser.nick}}</b>
+          <div>
+            <span>{{myUser.status}}</span>
+            <br>
+            <span>< {{myUser.subNick || 'No subNick'}} ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="whiteContainerPadded marto15">
+    <div class="row">
+      <div class="col">
+        <input class="form-control"  type="text" placeholder="Buscar Amigo">
+      </div>
+      <div class="col-md-auto">
+        <img src="assets/img/logo_live_add.png" class="icon">
+      </div>
+    </div>
+    <hr>
+    <b>Amigos {{firneds.length}}/ {{firneds.length}}</b>
+    <div *ngFor="let user of firneds; let i = index" class="disblo marbo5">
+      <a routerLink="/chat/{{user.uid}}">
+        <img class="logo-conexion" src="assets/img/logo_live_online.png" alt="Logo Conexion">
+        <b>{{user.nick}}</b> - {{user.subNick || 'No SubNick'}}
+        <small> {{user.email}}</small>
+      </a>
+    </div>
+  </div>
+</div>

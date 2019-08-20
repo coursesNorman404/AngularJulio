@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
+import {CookieService} from 'ngx-cookie'
+import { User } from '../intercafes/user'
 
 @Component({
   selector: 'app-home',
@@ -6,29 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  myUser = {
+  myUser: User = {
     nick: 'Norman404',
     status: 'online',
-    subNick: null
+    email: 'pepe@gmail.com',
+    uid: 'aaa'
   }
-  firneds = [
-    {uid: '1234', nick: 'norman404', status: 'online', email: 'norman.torres.mx@gmail.com', subNick: 'Esto es un mensaje'},
-    {uid: '1235', nick: 'norman405', status: 'online', email: 'norman@gmail.com', subNick: null},
-    {uid: '1236', nick: 'norman406', status: 'online', email: 'norman.mx@gmail.com', subNick: 'jaja'},
-    {uid: '1234', nick: 'norman404', status: 'online', email: 'norman.torres.mx@gmail.com', subNick: 'Esto es un mensaje'},
-    {uid: '1235', nick: 'norman405', status: 'online', email: 'norman@gmail.com', subNick: null},
-    {uid: '1234', nick: 'norman404', status: 'online', email: 'norman.torres.mx@gmail.com', subNick: 'Esto es un mensaje'},
-    {uid: '1235', nick: 'norman405', status: 'online', email: 'norman@gmail.com', subNick: null},
-    {uid: '1234', nick: 'norman404', status: 'online', email: 'norman.torres.mx@gmail.com', subNick: 'Esto es un mensaje'},
-    {uid: '1235', nick: 'norman405', status: 'online', email: 'norman@gmail.com', subNick: null},
-    {uid: '1234', nick: 'norman404', status: 'online', email: 'norman.torres.mx@gmail.com', subNick: 'Esto es un mensaje'},
-    {uid: '1235', nick: 'norman405', status: 'online', email: 'norman@gmail.com', subNick: null},
-    {uid: '1234', nick: 'norman404', status: 'online', email: 'norman.torres.mx@gmail.com', subNick: 'Esto es un mensaje'},
-    {uid: '1235', nick: 'norman405', status: 'online', email: 'norman@gmail.com', subNick: null},
-    
-
-  ]
-  constructor() { }
+  firneds = null
+  constructor(private userService: UserService, private _cookie: CookieService) {
+    console.log(this._cookie.get('uid'))
+    this.userService.getUserById(this._cookie.get('uid')).subscribe(
+      (res:User) => {
+      this.myUser = res
+      console.log(this.myUser)
+    })
+    this.userService.getUsers().subscribe( res => {
+      this.firneds = Object.keys(res).map(key => {
+        return res[key]
+      })
+    })
+  }
 
   ngOnInit() {
   }

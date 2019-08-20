@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-auto">
           <div class="avatarFrameOnline">
-            <img src="assets/img/generic_avatar.png" alt="avatarGenerico" id="homeAvatarPicture">
+            <img [src]="myUser.avatar || 'assets/img/generic_avatar.png'" alt="avatarGenerico" id="homeAvatarPicture">
           </div>
         </div>
         <div class="col-md-auto">
@@ -21,15 +21,15 @@
   <div class="whiteContainerPadded marto15">
     <div class="row">
       <div class="col">
-        <input class="form-control"  type="text" placeholder="Buscar Amigo">
+        <input class="form-control"  type="text" placeholder="Buscar Amigo" [(ngModel)]="query">
       </div>
       <div class="col-md-auto">
         <img src="assets/img/logo_live_add.png" class="icon">
       </div>
     </div>
     <hr>
-    <b>Amigos {{firneds.length}}/ {{firneds.length}}</b>
-    <div *ngFor="let user of firneds; let i = index" class="disblo marbo5">
+    <b *ngIf="firneds">Amigos {{firneds.length}}/ {{firneds.length}}</b>
+    <div *ngFor="let user of firneds | search: query; let i = index" class="disblo marbo5">
       <a routerLink="/chat/{{user.uid}}">
         <img class="logo-conexion" src="assets/img/logo_live_online.png" alt="Logo Conexion">
         <b>{{user.nick}}</b> - {{user.subNick || 'No SubNick'}}

@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-
+  message: any = {}
+  chat: any = []
+  myUser: any = {}
   constructor() { }
 
   ngOnInit() {

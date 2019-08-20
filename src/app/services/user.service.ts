@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core'
+import { AngularFireDatabase } from '@angular/fire/database'
+import { HttpClient } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  users = [
-    {name: 'Norman', email: 'norman@gmail.com', status: true, type: "free", id: 1},
-    {name: 'Norman Antonio', email: 'antonio@gmail.com', status: false, type: "pay", id: 2},
-    {name: 'Torres', email: 'torres@gmail.com', status: false , type: "aa", id: 3},
-    {name: 'Norman Gutierrez', email: 'gutierrez@gmail.com', status: true, type: "free", id: 4},
-    {name: 'Juan', email: 'juan@gmail.com', status: false, type: "aa", id: 5},
-    {name: 'Paco', email: 'paco@gmail.com', status: true, type: "pay", id: 6}
-  ]
-  getUserInfo (id) {
-   return this.users.filter(user => user.id == id)[0]
+  API_ENDPOINT = 'https://clase-a86ee.firebaseio.com'
+  constructor (
+    private angularFireDatabase: AngularFireDatabase,
+    private http: HttpClient) {}
+  getUsers() {
+    //return this.angularFireDatabase.list('/users')
+    return this.http.get(`${this.API_ENDPOINT}/users.json`)
   }
-  getUsers () {
-    return this.users
+  getUserById(uid: string) {
+    // return this.angularFireDatabase.object('/users/'+ uid)
+    return this.http.get(`${this.API_ENDPOINT}/users/${uid}.json`)
+  }
+  createUser(user) {
+    return this.angularFireDatabase.object('/users/'+user.uid).set(user)
+  }
+  updateUser(user) {
+    return this.angularFireDatabase.object('/users/'+user.uid).set(user)
   }
 }

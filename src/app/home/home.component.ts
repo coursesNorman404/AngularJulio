@@ -16,26 +16,29 @@ export class HomeComponent implements OnInit {
     nick: 'Norman404',
     status: 'online',
     email: 'pepe@gmail.com',
+    friends: null,
     uid: 'aaa'
   }
   firneds = null
   friendEmail: string
   closeResult: string;
+  query: string
   constructor(private userService: UserService,
     private _cookie: CookieService,
     private modalService: NgbModal,
     private requestsService: RequestsService) {
-    console.log(this._cookie.get('uid'))
     this.userService.getUserById(this._cookie.get('uid')).subscribe(
       (res:User) => {
       this.myUser = res
-      console.log(this.myUser)
+      if (this.myUser.friends) {
+        this.myUser.friends = Object.values(this.myUser.friends)
+      }
     })
-    this.userService.getUsers().subscribe( res => {
-      this.firneds = Object.keys(res).map(key => {
-        return res[key]
-      })
-    })
+    // this.userService.getUsers().subscribe( res => {
+    //   this.firneds = Object.keys(res).map(key => {
+    //     return res[key]
+    //   })
+    // })
   }
 
   ngOnInit() {

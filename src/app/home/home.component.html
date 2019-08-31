@@ -28,14 +28,16 @@
       </div>
     </div>
     <hr>
-    <b *ngIf="firneds">Amigos {{firneds.length}}/ {{firneds.length}}</b>
-    <div *ngFor="let user of firneds | search: query; let i = index" class="disblo marbo5">
+    <b *ngIf="myUser.friends">Amigos {{myUser.friends.length}}/ {{myUser.friends.length}}</b>
+    <app-contact class="col-md-12" *ngFor="let user of myUser.friends" [uid]="user"></app-contact>
+    <!-- <div *ngFor="let user of myUser.friends | search: query; let i = index" class="disblo marbo5">
+      {{user}}
       <a routerLink="/chat/{{user.uid}}">
         <img class="logo-conexion" src="assets/img/logo_live_online.png" alt="Logo Conexion">
         <b>{{user.nick}}</b> - {{user.subNick || 'No SubNick'}}
         <small> {{user.email}}</small>
       </a>
-    </div>
+    </div> -->
   </div>
 </div>
 

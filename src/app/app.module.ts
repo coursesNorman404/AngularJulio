@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { CookieModule } from 'ngx-cookie'
 import { ImageCropperModule } from 'ngx-image-cropper'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { BootstrapModalModule } from 'ng2-bootstrap-modal'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -20,18 +21,10 @@ import { MenuComponent } from './menu/menu.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatComponent } from './chat/chat.component'
 import { SearchPipe } from './pipes/search';
-
-export const environment = {
-  production: false,
-  firebase: {
-    apiKey: 'AIzaSyC7sxTSmXR-leyPCldVgIWwRGiK4aSPfZs',
-    authDomain: 'clase-a86ee.firebaseapp.com',
-    databaseURL: 'https://clase-a86ee.firebaseio.com',
-    projectId: 'clase-a86ee',
-    storageBucket: 'clase-a86ee.appspot.com',
-    messagingSenderId: '126498156773'
-  }
-};
+import { RequestComponent } from './modals/request/request.component';
+import { ContactComponent } from './contact/contact.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,10 +36,12 @@ export const environment = {
     MenuComponent,
     ProfileComponent,
     ChatComponent,
-    SearchPipe
+    SearchPipe,
+    RequestComponent,
+    ContactComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -56,9 +51,12 @@ export const environment = {
     HttpClientModule,
     CookieModule.forRoot(),
     ImageCropperModule,
-    NgbModule
+    NgbModule,
+    BootstrapModalModule.forRoot({container: document.body}),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [RequestComponent]
 })
 export class AppModule { }

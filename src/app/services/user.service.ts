@@ -24,4 +24,8 @@ export class UserService {
   updateUser(user) {
     return this.angularFireDatabase.object('/users/'+user.uid).set(user)
   }
+  addFriend(userId, frinedId) {
+    this.angularFireDatabase.object('/users/'+userId+'/friends/'+frinedId).set(frinedId)
+    return this.angularFireDatabase.object('/users/'+frinedId+'/friends/'+userId).set(userId)
+  }
 }

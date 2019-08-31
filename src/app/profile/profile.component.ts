@@ -23,8 +23,6 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserById(this._cookie.get('uid')).subscribe((res:any) => {
       this.user = res
     })
-    // this.user = this.userService.getUserInfo(this.route.snapshot.params.id)
-    // console.log(this.user)
   }
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;

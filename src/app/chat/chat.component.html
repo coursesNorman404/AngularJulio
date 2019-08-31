@@ -1,4 +1,4 @@
-<div id="conversationContainer">
+<div id="conversationContainer" [ngClass]="{'shaker': shake}">
     <div class="contPrinc pato45">
       <div class="row">
         <div class="col-xs-3 bg-grey marle-25">
@@ -10,20 +10,20 @@
           </div>
         </div>
         <div class="col">
-                  <span><b>{{myUser.nick}} ({{myUser.status}})</b></span>
+                  <span><b>{{frinend.nick}} ({{frinend.status}})</b></span>
           <div class="container">
             <div class="chatContainer marto15">
-                          <!-- <div *ngFor="let msn of chat">
-                              <div class="exampleChat">
-                                  <span><b> {{msn.nick}}</b></span>
-                                  <p class="marle-25"> {{msn.message}}</p>
-                              </div>
-                          </div> -->
+              <div *ngFor="let m of conversation">
+                 <b>{{getUserById(m.sender)}}</b> dice: <br>
+                 <span>
+                   {{m.text}}
+                 </span>
+              </div>
             </div>
             <div class="bottomChat">
-              <input id="textChat" type="area" class="form-control areaChat" placeholder="Escribe un mensaje">
+              <input id="textChat" type="area" class="form-control areaChat" placeholder="Escribe un mensaje" [(ngModel)]="textMessage" (keyup.enter)="sendMessage()">
               <div class="marto15">
-                <img src="assets/img/zumbido.png"class="iconImage img-fluid">
+                <img src="assets/img/zumbido.png"class="iconImage img-fluid" (click)="sendZumbido()">
               </div>
             </div> 
           </div>

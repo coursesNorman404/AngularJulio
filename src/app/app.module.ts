@@ -8,6 +8,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage'
 import { HttpClientModule } from '@angular/common/http'
 import { CookieModule } from 'ngx-cookie'
 import { ImageCropperModule } from 'ngx-image-cropper'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -54,7 +55,8 @@ export const environment = {
     AngularFireStorageModule,
     HttpClientModule,
     CookieModule.forRoot(),
-    ImageCropperModule
+    ImageCropperModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
